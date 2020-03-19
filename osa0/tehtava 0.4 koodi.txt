@@ -2,8 +2,8 @@ Selain->+Palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
 Selain->+Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
 Palvelin-->-Selain: HTML-koodi
 Selain->+Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
-Palvelin-->-Selain: CSS-koodi
+Palvelin-->-Selain: CSS-koodi: main.css
 Selain->+Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
-Palvelin-->-Selain: Javascript-koodi
+Palvelin-->-Selain: Javascript-koodi: main.js
 Selain->+Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
 Palvelin-->-Selain: json-tiedosto
