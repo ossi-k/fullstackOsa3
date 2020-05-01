@@ -54,7 +54,8 @@ const App = () => {
   }
   const part3 = {
     name: "State of a component",
-    excercises: 14}
+    excercises: 14
+  }
 
   return (
     <div>
