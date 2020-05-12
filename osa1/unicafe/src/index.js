@@ -5,14 +5,6 @@ import * as serviceWorker from './serviceWorker';
 
 const Statistics = (props) => {
 
-  const Average = () => {
-    return (props.counterGood * 1 + props.counterBad * -1) / props.counterAll
-  }
-
-  const Positive = () => {
-    return props.counterGood / props.counterAll * 100
-  }
-
   return (
     <div>
       <a>
@@ -32,11 +24,11 @@ const Statistics = (props) => {
       </a>
       <br></br>
       <a>
-        <b>Average</b> <Average></Average>
+        <b>Average</b> {(props.counterGood * 1 + props.counterBad * -1) / props.counterAll}
       </a>
       <br></br>
       <a>
-        <b>Positive</b> <Positive></Positive> %
+        <b>Positive</b> {props.counterGood / props.counterAll * 100} %
       </a>
     </div >
   )
