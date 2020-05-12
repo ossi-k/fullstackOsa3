@@ -1,40 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Hello = (props) => {
+const Display = ({counter}) => <div>{counter}</div>
+
+const Button = ({handleClick, text}) => {
+  return (
+    <button onClick={handleClick}>
+      {text}
+    </button>
+  )
+}
+
+/* const App = (props) => {
+  const [counter, setCounter] = useState(0)
+  const increaseByOne = () => setCounter(counter + 1)
+  const decreasedByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
+
   return (
     <div>
-      <p>Hello {props.name}, you are {props.age} years old
-      </p>
-    </div>
+      <Display counter={counter} />
+      <Button
+        handleClick={increaseByOne}
+        text='plus'
+      />
+      <Button
+        handleClick={setToZero}
+        text='zero'
+      />
+      <Button
+        handleClick={decreasedByOne}
+        text='minus'
+      />
+    </div >
   )
-}
+} */
 
-const Sankarijulistus = (props) => {
-  return(
-    <div>
-      <p>{props.noKuka} on melkoionen {props.noMika}</p>
-    </div>
-  )
-}
-
-const App = () => {
-  const nimi = "Pekka"
-  const ika = 10
-  const noKuka = "Juuso"
-  const noMika = "Supersankari"
-  
+const App = (props) => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const handleLeftClick = () => {    setAll(allClicks.concat('L'))    
+  setLeft(left + 1)  }
+  const handleRightClick = () => {    setAll(allClicks.concat('R'))    
+  setRight(right + 1)  }
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={nimi} age={ika} />
-      <h2>Sankari</h2>
-      <Sankarijulistus noKuka = {noKuka} noMika = {noMika}/>
+      <div>
+        {left}
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
+        {right}
+        <p>{allClicks.join(' ')}</p>      </div>
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
-
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)
