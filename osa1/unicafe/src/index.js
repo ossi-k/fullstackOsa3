@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-const Display = (props) => {
+const Statistics = (props) => {
+
+  const Average = () => {
+    return (props.counterGood * 1 + props.counterBad * -1) / props.counterAll
+  }
+
+  const Positive = () => {
+    return props.counterGood / props.counterAll * 100
+  }
+
   return (
     <div>
       <a>
@@ -17,6 +26,18 @@ const Display = (props) => {
       <a>
         <b>Bad</b>  {props.counterBad}
       </a>
+      <br></br>
+      <a>
+        <b>All</b> {props.counterAll}
+      </a>
+      <br></br>
+      <a>
+        <b>Average</b> <Average></Average>
+      </a>
+      <br></br>
+      <a>
+        <b>Positive</b> <Positive></Positive> %
+      </a>
     </div >
   )
 }
@@ -26,9 +47,22 @@ const App = () => {
   const [counterGood, setCounterGood] = useState(0)
   const [counterNeutral, setCounterNeutral] = useState(0)
   const [counterBad, setCounterBad] = useState(0)
-  const increaseGoodByOne = () => setCounterGood(counterGood + 1)
-  const increaseNeutralByOne = () => setCounterNeutral(counterNeutral + 1)
-  const increaseBadByOne = () => setCounterBad(counterBad + 1)
+  const [counterAll, setCounterAll] = useState(0)
+
+  const increaseGoodByOne = () => {
+    setCounterGood(counterGood + 1)
+    setCounterAll(counterAll + 1)
+  }
+
+  const increaseNeutralByOne = () => {
+    setCounterNeutral(counterNeutral + 1)
+    setCounterAll(counterAll + 1)
+
+  }
+  const increaseBadByOne = () => {
+    setCounterBad(counterBad + 1)
+    setCounterAll(counterAll + 1)
+  }
 
   return (
     <div>
@@ -43,8 +77,9 @@ const App = () => {
         Bad
       </button>
       <h2>Statistics</h2>
-      <Display counterGood={counterGood} counterNeutral={counterNeutral} counterBad={counterBad}></Display>
-    </div>
+      <Statistics counterGood={counterGood} counterNeutral={counterNeutral}
+        counterBad={counterBad} counterAll={counterAll}></Statistics>
+    </div >
   )
 }
 
