@@ -3,36 +3,41 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-const Statistics = (props) => {
 
+const Button = (props) => {
   return (
-    <div>
-      <a>
-        <b>Good</b>  {props.counterGood}
-      </a>
-      <br></br>
-      <a>
-        <b>Neutral</b>  {props.counterNeutral}
-      </a>
-      <br></br>
-      <a>
-        <b>Bad</b>  {props.counterBad}
-      </a>
-      <br></br>
-      <a>
-        <b>All</b> {props.counterAll}
-      </a>
-      <br></br>
-      <a>
-        <b>Average</b> {(props.counterGood * 1 + props.counterBad * -1) / props.counterAll}
-      </a>
-      <br></br>
-      <a>
-        <b>Positive</b> {props.counterGood / props.counterAll * 100} %
-      </a>
-    </div >
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
   )
 }
+
+const StatisticLine = (props) => {
+  return (
+  <div>{props.text} {props.value} {props.endMarker}</div>
+  )
+}
+
+const Statistics = (props) => {
+
+  if (props.counterAll > 0) {
+    return (
+      <div>
+        <StatisticLine text="good" value={props.counterGood} />
+        <StatisticLine text="neutral" value={props.counterNeutral} />
+        <StatisticLine text="bad" value={props.counterBad} />
+        <StatisticLine text="average" value={(props.counterGood * 1 + props.counterBad * -1) / props.counterAll} />
+        <StatisticLine text="positive" value={props.counterGood / props.counterAll * 100} endMarker="%" />  
+      </div >
+
+    )
+  } else {
+    return (
+      <div>No feedback given</div>
+    )
+  }
+}
+
 
 
 const App = () => {
@@ -59,15 +64,15 @@ const App = () => {
   return (
     <div>
       <h2>Give Feedback</h2>
-      <button onClick={increaseGoodByOne}>
-        Good
-      </button>
-      <button onClick={increaseNeutralByOne}>
-        Neutral
-      </button>
-      <button onClick={increaseBadByOne}>
-        Bad
-      </button>
+      <Button handleClick={increaseGoodByOne}
+        text="Good"
+      />
+      <Button handleClick={increaseNeutralByOne}
+        text="Neutral"
+      />
+      <Button handleClick={increaseBadByOne}
+        text="Bad"
+      />
       <h2>Statistics</h2>
       <Statistics counterGood={counterGood} counterNeutral={counterNeutral}
         counterBad={counterBad} counterAll={counterAll}></Statistics>
