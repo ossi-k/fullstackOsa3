@@ -14,7 +14,9 @@ const Button = (props) => {
 
 const StatisticLine = (props) => {
   return (
-  <div>{props.text} {props.value} {props.endMarker}</div>
+    <tr>
+      <td>{props.text}</td> <td>{props.value}</td> <td>{props.endMarker}</td>
+    </tr>
   )
 }
 
@@ -27,7 +29,7 @@ const Statistics = (props) => {
         <StatisticLine text="neutral" value={props.counterNeutral} />
         <StatisticLine text="bad" value={props.counterBad} />
         <StatisticLine text="average" value={(props.counterGood * 1 + props.counterBad * -1) / props.counterAll} />
-        <StatisticLine text="positive" value={props.counterGood / props.counterAll * 100} endMarker="%" />  
+        <StatisticLine text="positive" value={props.counterGood / props.counterAll * 100} endMarker="%" />
       </div >
 
     )
@@ -37,8 +39,6 @@ const Statistics = (props) => {
     )
   }
 }
-
-
 
 const App = () => {
   const [counterGood, setCounterGood] = useState(0)
