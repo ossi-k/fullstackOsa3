@@ -1,57 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
-const Header = (props) => {
-  return (
-    <div>
-      <h1>
-        {props.course}
-      </h1>
-    </div>
-  )
-}
-
-const Content = (props) => {
-  const { courses } = props
-  console.log(courses)
-  return (
-    <div>
-      {courses.map(course =>
-        <p key={course.id}>
-          {course.name} {course.exercises}
-        </p>
-      )}
-    </div>
-  )
-}
-
-const Total = (props) => {
-  const { courses } = props
-  let sum = 0
-  {
-    courses.map(course =>
-      sum = sum + course.exercises)
-  }
-  return (
-    <div>
-      <b>
-        Total of {sum} exercises
-      </b>
-    </div>
-  )
-}
-
-const Course = ({ course }) => {
-  return (
-    <div>
-      <Header course={course.name} />
-      <Content courses={course.parts} />
-      <Total courses={course.parts} />
-    </div>
-
-  )
-}
+import Course from './components/Course'
 
 const courses = [
   {
@@ -77,6 +26,59 @@ const courses = [
         name: 'Redux',
         exercises: 11,
         id: 4
+      }
+    ]
+  },
+  {
+    name: 'Node.js',
+    id: 2,
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
+      },
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
+    ]
+  },
+  {
+    name: 'Tiraterapia',
+    id: 3,
+    parts: [
+      {
+        name: 'Algoritmia päähän',
+        exercises: 30,
+        id: 1
+      },
+      {
+        name: 'Päätä algoritmiin',
+        exercises: 1,
+        id: 2
+      },
+      {
+        name: 'Dijkstran algoritmi',
+        exercises: 10,
+        id: 3
+      }
+    ]
+  },
+  {
+    name: 'Vielä yksi kurssi',
+    id: 4,
+    parts: [
+      {
+        name: 'Päätä algoritmiin',
+        exercises: 1,
+        id: 2
+      },
+      {
+        name: 'Dijkstran algoritmi',
+        exercises: 10,
+        id: 3
       }
     ]
   }
