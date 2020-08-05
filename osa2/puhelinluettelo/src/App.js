@@ -35,7 +35,7 @@ const App = () => {
     if (persons.includes(duplicate)) {
       // window.alert(`${newName} is already added to phonebook`)
       let duplicateID = duplicate.id
-      if (window.confirm(`${duplicate.name} is already here, replace the number?`)) {
+      if (window.confirm(`${duplicate.name} is already added to the phonebook, replace the old number with a new one?`)) {
         axios
           .put(`http://localhost:3001/persons/${duplicateID}`, personObject)
           window.location.reload()
