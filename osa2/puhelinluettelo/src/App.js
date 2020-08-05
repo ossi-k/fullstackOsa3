@@ -33,7 +33,13 @@ const App = () => {
     const duplicate = persons.find(person => personObject.name === person.name)
 
     if (persons.includes(duplicate)) {
-      window.alert(`${newName} is already added to phonebook`)
+      // window.alert(`${newName} is already added to phonebook`)
+      let duplicateID = duplicate.id
+      if (window.confirm(`${duplicate.name} is already here, replace the number?`)) {
+        axios
+          .put(`http://localhost:3001/persons/${duplicateID}`, personObject)
+          window.location.reload()
+      }
     } else {
       personService
         .create(personObject)
