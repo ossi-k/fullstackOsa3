@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -12,14 +13,12 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+    personService
+      .getAll()
       .then(response => {
-        console.log('promise fulfilled')
         setPersons(response.data)
-      })
-  }, [])
+      })}, [])
+
   console.log('render', persons.length, 'persons')
 
   const addPerson = (event) => {
@@ -35,11 +34,11 @@ const App = () => {
     if (persons.includes(duplicate)) {
       window.alert(`${newName} is already added to phonebook`)
     } else {
-      axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
-      })
+      personService
+        .create(personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+        })
     }
 
 
