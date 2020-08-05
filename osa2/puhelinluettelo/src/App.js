@@ -9,14 +9,15 @@ const App = () => {
       number: '040-1231244'
     }
   ])
+
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
   useEffect(() => {
     personService
       .getAll()
-      .then(response => {
-        setPersons(response.data)
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })}, [])
 
   console.log('render', persons.length, 'persons')
@@ -36,13 +37,21 @@ const App = () => {
     } else {
       personService
         .create(personObject)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
         })
     }
+  }
 
+  const removePerson = (name) => {
 
+    if(window.confirm(`Delete ${name}?`)) {
+      const newPersons = persons.filter((item) => item.name !== name)
+      let id = persons.find((item) => item.name === name).id
+      setPersons(newPersons)
 
+      personService.remove(id)
+    }
   }
 
   const handlePersonChange = (event) => {
@@ -76,7 +85,10 @@ const App = () => {
         {persons.map(person =>
           <a key={person.name}>
             {person.name}, {" "}
-            {person.number}
+            {person.number}, {" "}
+            <button type="button" onClick ={ () => removePerson(person.name)}>
+              remove
+            </button>
             <br/>
           </a>
         )}
