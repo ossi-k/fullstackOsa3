@@ -3,10 +3,10 @@ const { response } = require('express')
 const morgan = require('morgan')
 const app = express()
 
-morgan("tiny")
+
 
 app.use(express.json())
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
+app.use(morgan("tiny"))
 
 
 let persons = [ {
