@@ -1,9 +1,0 @@
-
-post http://localhost:3001/api/persons
-Content-Type: application/json
-
-    {
-        "name": "Marko Makonen",
-        "number": "5464646"
-
-    }
