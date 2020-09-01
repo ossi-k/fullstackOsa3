@@ -1,8 +1,0 @@
-A = silmälukujen summa on 7
-B = eka noppa on pariton
-
-A U B
-
-HYÖDYLLISIÄ KOMENTOJA
-=====================
-git push heroku master
