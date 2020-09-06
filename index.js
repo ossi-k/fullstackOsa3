@@ -1,9 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const { response } = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
-
+const Person = require('./models/person')
 
 
 app.use(express.json())
@@ -44,7 +45,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-  res.send(persons)
+  //res.send(persons)
+  Person.find({}).then(persons => {
+    res.json(persons)
+  }) 
 })
 
 app.get('/api/info', (req, res) => {
@@ -53,14 +57,17 @@ app.get('/api/info', (req, res) => {
   })
 
 app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
+/*   const id = Number(req.params.id)
   const person = persons.find(person => person.id === id)
 
   if(person) {
     res.json(person)
   } else {
     res.status(404).end()
-  }
+  } */
+  Person.findById(req.params.id).then(person => {
+    res.json(person)
+  })
 })
 
 app.delete('/api/persons/:id', (req, res) => {
@@ -92,18 +99,21 @@ app.post('/api/persons/', (req, res) => {
     })
   }
 
-  const person = {
+  const person = new Person({
     name: body.name,
     number: body.number,
     id: generateId()
-  }
+  })
 
-  persons = persons.concat(person)
+  // persons = persons.concat(person)
+  person.save().then(savedPerson => {
+    res.json(savedPerson)
+  })
 
-  res.json(person)
+  // res.json(person)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
